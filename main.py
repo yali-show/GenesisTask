@@ -1,4 +1,5 @@
 from config import *
+import base64
 import logging
 import json
 import datetime
@@ -102,13 +103,22 @@ class GCP:
         self.api_cursor = ApiControl(url, key)
         self.FILE = 'DataMart_data/DataMart.csv'
         self.PROJECT_NAME = 'hly-gnss'
-        self.TABLE_NAMES = ['cpi', 'revenue', 'roas']
+        self.TABLE_NAME = ['cpi', 'revenue', 'roas']
         self.BUCKET_NAMES = 'hly-gnss-bckt'
         self.DATE = ((datetime.datetime.now() - datetime.timedelta(days=1))
                      .strftime('%Y-%m-%d'))
 
         self.data_frame_for_update = self.setup_existed_data()
 
+    def hello_pubsub(self, event, context) -> None:
+        """Triggering from a message of a Pub/Sub
+        :param event: dict event
+        :param context: google.cloud.functions.Context  metadata for event
+        :return:
+        """
+
+        pubsub_ms =base64.b64decode(event['data']).decode('utf-8')
+        print(pubsub_ms)
         self.upload_changes()
 
     def setup_existed_data(self) -> pd.DataFrame:
@@ -244,5 +254,10 @@ class GCP:
         return revenue / costs
 
 
+def hello_pubsub(event, context):
+    connector = GCP(URL, KEY)
+    connector.hello_pubsub(event, context)
+
+
 if __name__ == '__main__':
-    GCP(URL, KEY)
+    hello_pubsub('event', 'context')
