@@ -245,4 +245,4 @@ class GCP:
 
 
 if __name__ == '__main__':
-    controller = ApiControl(URL, KEY)
+    GCP(URL, KEY)
