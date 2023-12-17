@@ -19,8 +19,9 @@ class ApiControl:
 
     def get_installs(self, date: str) -> dict:
         """
+        Instals info
         :param date: string yyyy-mm-dd
-        :return: response from api
+        :return: dict response from api
         """
 
         try:
@@ -36,11 +37,11 @@ class ApiControl:
 
     def get_costs(self, date: str, dimension=None) -> requests.Response:
         """
-
+        Managment info
         :param date: string yyyy-mm-dd
         :param dimension: (str) location, channel, medium, campaign, keyword,
          ad_content, ad_group, landing_page
-        :return: response from api
+        :return: requests.Response from server
         """
 
         params = {'date': date}
@@ -61,6 +62,11 @@ class ApiControl:
             print(ex)
 
     def get_orders(self, date: str) -> requests.Response:
+        """
+        Orders info
+        :param date: string yyyy-mm-dd
+        :return: requests.Response from server
+        """
         logging.info("Orders response getting")
         try:
             request = requests.get(url=self.url + '/orders',
@@ -73,6 +79,12 @@ class ApiControl:
             print(ex)
 
     def get_events_next_page(self, date: str, next_page=None):
+        """
+        Users events info
+        :param date: string yyyy-mm-dd
+        :param next_page: string next_page token
+        :return:
+        """
         params = {'date': date}
 
         if next_page:
@@ -85,6 +97,7 @@ class ApiControl:
 
 
 class GCP:
+    """Preparing data and uploading to GCP"""
     def __init__(self, url, key):
         self.api_cursor = ApiControl(url, key)
         self.FILE = 'DataMart_data/DataMart.csv'
@@ -99,6 +112,10 @@ class GCP:
         self.upload_changes()
 
     def setup_existed_data(self) -> pd.DataFrame:
+        """
+        Upload from GCP existed csv to pandas or create new DataFrame obj
+        :return: pd.DataFrame DataMart
+        """
         client = storage.Client()
         bucket = client.get_bucket(self.BUCKET_NAMES)
         blob = bucket.blob(self.FILE)
@@ -111,74 +128,16 @@ class GCP:
         else:
             return pd.DataFrame()
 
-    def orders_prepare(self):
-
-        parquet_table = pq.read_table(
-            io.BytesIO(self.api_cursor.get_orders(self.DATE).content)
-        )
-        df = parquet_table.to_pandas()
-        return df
-
-    def costs_prepare(self) -> float:
-        # TODO change logic
-        costs = self.api_cursor.get_costs(self.DATE).content
-        data = costs.decode('utf-8')
-        data = data.split('\n')
-        costs = float(data[1])
-        return costs
-
-    def events_prepare(self):
-        # TODO change logic
-
-        in_progres = True
-        errors = 10
-        output = self.api_cursor.get_events_next_page(self.DATE)
-        next_page = output['next_page']
-        output = output['data']
-
-        while in_progres:
-
-            try:
-
-                df = pd.DataFrame(output)
-                logging.info("Trying to get response data")
-                output = self.api_cursor.get_events_next_page(self.DATE,
-                                                         next_page)
-
-                logging.info("Trying to get new page's link")
-                next_page = df['next_page']
-
-            except requests.exceptions.JSONDecodeError as json_ex:
-                logging.error("Json decode error")
-
-                time.sleep(5)
-
-            except KeyError as krr:
-
-                logging.warning("The last one page was shared or api changed",
-                                exc_info=krr)
-
-                in_progres = False
-
-    def cpi_data(self) -> int:
-        costs = self.costs_prepare()
-        installs = self.api_cursor.get_installs(self.DATE)['count']
-        data = costs / installs
-        return data
-
-    def revenue_data(self) -> int:
-        ...
-
-    def roas_data(self) -> int:
-        ...
-
     def new_data(self) -> None:
-        logging.info("Setup data for update")
+        """ Prepare new data for DataMart updating """
+        logging.info("Updating data prepare")
         try:
+            costs = self.costs_prepare()
+            revenue = self.revenue_data()
             new_data = {'date': [self.DATE],
-                        'cpi': [self.cpi_data()],
-                        'revenue': [self.revenue_data()],
-                        'roas': [self.roas_data()]}
+                        'cpi': [self.cpi_data(costs)],
+                        'revenue': [revenue],
+                        'roas': [self.roas_data(revenue, costs)]}
 
             pd.concat([self.data_frame_for_update, new_data])
         except Exception as ex:
@@ -186,6 +145,8 @@ class GCP:
             print(ex)
 
     def upload_changes(self) -> None:
+        """ Update DataMart """
+
         self.new_data()
 
         logging.info("Connecting to storage")
@@ -200,23 +161,88 @@ class GCP:
             logging.error("Something went wrong in 'GCP.upload_changes'")
             print(ex)
 
+    def orders_prepare(self) -> pd.DataFrame:
+        """
+        Prepare orders dataset
+        :return: pd.DataFrame with orders data
+        """
+
+        parquet_table = pq.read_table(
+            io.BytesIO(self.api_cursor.get_orders(self.DATE).content)
+        )
+        df = parquet_table.to_pandas()
+        return df
+
+    def costs_prepare(self) -> float:
+        """
+        Get managment costs info
+        :return: float costs (managment)
+        """
+        costs = self.api_cursor.get_costs(self.DATE).content
+        data = costs.decode('utf-8')
+        data = data.split('\n')
+        costs = float(data[1])
+        return costs
+
+    # def events_prepare(self):
+    #     # TODO need in?
+    #
+    #     in_progres = True
+    #     output = self.api_cursor.get_events_next_page(self.DATE)
+    #     next_page = output['next_page']
+    #     output = output['data']
+    #
+    #     while in_progres:
+    #
+    #         try:
+    #
+    #             df = pd.DataFrame(output)
+    #             logging.info("Trying to get response data")
+    #             output = self.api_cursor.get_events_next_page(self.DATE,
+    #                                                      next_page)
+    #
+    #             logging.info("Trying to get new page's link")
+    #             next_page = df['next_page']
+    #
+    #         except requests.exceptions.JSONDecodeError as json_ex:
+    #             logging.error("Json decode error")
+    #
+    #             time.sleep(5)
+    #
+    #         except KeyError as krr:
+    #
+    #             logging.warning("The last one page was shared or api changed",
+    #                             exc_info=krr)
+    #
+    #             in_progres = False
+
+    def cpi_data(self, costs) -> float:
+        """
+        Get cpi value
+        :return: float cpi
+        """
+        installs = self.api_cursor.get_installs(self.DATE)['count']
+        cpi = costs / installs
+        return cpi
+
+    def revenue_data(self) -> float:
+        """
+        Get revenue value
+        :return: float revenue
+        """
+        orders = self.orders_prepare()
+        revenue = (orders['iap_item.price'].sum() - orders['tax'].sum()
+                   - orders['fee'].sum() - orders['discount.amount'].sum())
+        return revenue
+
+    @staticmethod
+    def roas_data(revenue, costs) -> float:
+        """
+        Calculate roas value
+        :return: float roas value
+        """
+        return revenue / costs
+
 
 if __name__ == '__main__':
-
     controller = ApiControl(URL, KEY)
-
-
-    # df.to_csv("234.csv")
-    # print(df)
-    # TODO USE THIS DATA FOR REVENUE
-    df = pd.read_csv('234.csv')
-    result = df.loc[:, ['fee', 'tax', 'iap_item.price', 'discount.amount']]
-    print(result)
-    # df.to_csv("111.csv")
-
-
-
-
-
-
-
