@@ -1,0 +1,92 @@
+,Unnamed: 0,event_time,transaction_id,type,origin_transaction_id,category,payment_method,fee,tax,iap_item.name,iap_item.price,discount.code,discount.amount
+0,0,2023-12-10 04:54:39.280,khZq8pMqfYRHf67n,,,Feature Unlock,In-app Purchase,0.05,0.35,500 Gold Coins,0.99,,0.0
+1,1,2023-12-10 05:22:53.457,bxkqVjU170DAvdJg,,,Power-ups,Direct Card,0.3,0.35,Ad-Free Experience,3.99,VIP15,0.15
+2,2,2023-12-10 05:23:30.365,UapawE3Y7iTF2dH7,,,Virtual Currency,Direct Card,0.1,0.3,Super Power Boost,2.99,,0.0
+3,3,2023-12-10 05:39:55.109,U7a3hGAU9ulV88xu,,,Skins,Gift Card,0.1,0.3,500 Gold Coins,0.99,,0.0
+4,4,2023-12-10 05:40:38.036,asARcyTHVTtl2Ws8,,,Skins,Gift Card,0.2,0.3,Ad-Free Experience,3.99,BONUS5,0.05
+5,5,2023-12-10 05:56:59.222,iM5Cly644MBiNHmL,refund,asARcyTHVTtl2Ws8,Skins,Gift Card,0.2,0.3,Ad-Free Experience,3.99,BONUS5,0.05
+6,6,2023-12-10 06:30:41.371,n4Yzq3gAixnq84Fe,,,Feature Unlock,In-app Purchase,0.1,0.15,Premium Level Access,4.99,,0.0
+7,7,2023-12-10 06:37:38.357,bY7BJ2H3FUag3cHd,,,Skins,Gift Card,0.05,0.35,Premium Level Access,4.99,BONUS5,0.05
+8,8,2023-12-10 06:38:34.105,bhVKJ1B4UsyXnweg,,,Skins,Gift Card,0.2,0.35,500 Gold Coins,0.99,,0.0
+9,9,2023-12-10 06:43:46.461,998Vc6PfmBfDUqBm,,,Virtual Currency,In-app Purchase,0.05,0.2,Special Character Skin,1.99,,0.0
+10,10,2023-12-10 06:44:37.829,bG1WfN2Iey2NB1R5,refund,bxkqVjU170DAvdJg,Power-ups,Direct Card,0.3,0.35,Ad-Free Experience,3.99,VIP15,0.15
+11,11,2023-12-10 06:51:24.485,bjoltcbrgsT8oZj6,,,Power-ups,In-app Purchase,0.05,0.05,Super Power Boost,2.99,,0.0
+12,12,2023-12-10 06:58:41.911,8cdnJZyEr7kE2vus,,,Power-ups,Gift Card,0.2,0.15,500 Gold Coins,0.99,,0.0
+13,13,2023-12-10 07:07:37.438,a0s6Bz4mrheE1xeL,,,Skins,Direct Card,0.15,0.05,Ad-Free Experience,3.99,,0.0
+14,14,2023-12-10 07:10:24.967,Pdk6QmDaxMdixyqw,,,Power-ups,Direct Card,0.15,0.25,Super Power Boost,2.99,BONUS5,0.05
+15,15,2023-12-10 07:50:40.914,MAoAAqCNhdj16AXn,,,Skins,Direct Card,0.2,0.25,Super Power Boost,2.99,,0.0
+16,16,2023-12-10 07:51:19.011,nmmbgTQiv01AkhiJ,,,Power-ups,In-app Purchase,0.3,0.3,Super Power Boost,2.99,SALE10,0.1
+17,17,2023-12-10 08:09:12.738,0aVADwfGRn9F7aRp,,,Skins,Direct Card,0.05,0.25,Special Character Skin,1.99,,0.0
+18,18,2023-12-10 08:27:39.773,ee67vgRS528UM0kB,,,Feature Unlock,In-app Purchase,0.2,0.15,500 Gold Coins,0.99,VIP15,0.15
+19,19,2023-12-10 08:34:45.769,cZeX4LQgMvvFJqDO,,,Virtual Currency,Gift Card,0.15,0.2,500 Gold Coins,0.99,,0.0
+20,20,2023-12-10 09:01:56.468,d7MXXmwtQTkxqb94,,,Power-ups,Direct Card,0.3,0.3,Monthly VIP Subscription,5.99,,0.0
+21,21,2023-12-10 09:04:24.960,gbClvFYsfh1bqbDn,,,Skins,In-app Purchase,0.2,0.35,500 Gold Coins,0.99,,0.0
+22,22,2023-12-10 09:16:14.666,2Qa6m1m2derH7MOb,,,Power-ups,In-app Purchase,0.15,0.25,Super Power Boost,2.99,SALE10,0.1
+23,23,2023-12-10 09:53:57.102,hVRZhcM4vl2SFhgr,,,Virtual Currency,In-app Purchase,0.1,0.35,Special Character Skin,1.99,,0.0
+24,24,2023-12-10 10:13:39.070,ghTMasJO3Hqq6EcW,,,Virtual Currency,Direct Card,0.15,0.2,500 Gold Coins,0.99,,0.0
+25,25,2023-12-10 10:21:01.829,i8bcAJGdJcQwdjrf,,,Virtual Currency,Direct Card,0.25,0.05,500 Gold Coins,0.99,BONUS5,0.05
+26,26,2023-12-10 10:24:36.785,euzcF7WcEnyUrZc9,refund,nmmbgTQiv01AkhiJ,Power-ups,In-app Purchase,0.3,0.3,Super Power Boost,2.99,SALE10,0.1
+27,27,2023-12-10 10:55:02.383,iUA00cPxz7m183z6,,,Skins,In-app Purchase,0.2,0.1,Special Character Skin,1.99,,0.0
+28,28,2023-12-10 10:56:36.579,e1gHK7np6xNjiR11,,,Power-ups,In-app Purchase,0.25,0.1,500 Gold Coins,0.99,,0.0
+29,29,2023-12-10 10:59:06.999,iPuoxvR5hXyChEqI,,,Feature Unlock,In-app Purchase,0.15,0.3,Special Character Skin,1.99,,0.0
+30,30,2023-12-10 11:14:28.005,jLl78UN2S3lVV6At,,,Power-ups,Gift Card,0.3,0.3,Monthly VIP Subscription,5.99,VIP15,0.15
+31,31,2023-12-10 11:35:36.967,Q79XkCEUUrixzY2A,,,Skins,Gift Card,0.1,0.15,Premium Level Access,4.99,,0.0
+32,32,2023-12-10 11:38:09.446,2gBUkspqCNFPunBd,,,Power-ups,Direct Card,0.15,0.2,Premium Level Access,4.99,,0.0
+33,33,2023-12-10 11:57:36.747,mfvmjmquuwHrvKJr,,,Feature Unlock,In-app Purchase,0.1,0.15,500 Gold Coins,0.99,VIP15,0.15
+34,34,2023-12-10 11:59:25.383,QPY08cEB6pBhAvPd,,,Skins,In-app Purchase,0.05,0.2,Premium Level Access,4.99,,0.0
+35,35,2023-12-10 12:35:34.006,gDDfImfcGyyjy8IX,,,Skins,In-app Purchase,0.05,0.05,Premium Level Access,4.99,,0.0
+36,36,2023-12-10 12:44:39.253,l5ojMpRb8LLLIjXc,,,Power-ups,Gift Card,0.3,0.05,Super Power Boost,2.99,,0.0
+37,37,2023-12-10 12:50:31.951,2fDWGMRvl65tuOab,,,Feature Unlock,In-app Purchase,0.15,0.3,Premium Level Access,4.99,,0.0
+38,38,2023-12-10 12:59:25.026,kanFFAS74es1z43u,,,Power-ups,Direct Card,0.2,0.3,500 Gold Coins,0.99,,0.0
+39,39,2023-12-10 13:23:04.128,4n9iGhdDzbEY6bKT,,,Virtual Currency,In-app Purchase,0.2,0.05,Super Power Boost,2.99,,0.0
+40,40,2023-12-10 13:27:20.780,0kjZs7FETJqujY4C,,,Feature Unlock,Direct Card,0.3,0.25,Super Power Boost,2.99,,0.0
+41,41,2023-12-10 13:42:53.783,pcUPagE2cj2A0Iin,refund,2fDWGMRvl65tuOab,Feature Unlock,In-app Purchase,0.15,0.3,Premium Level Access,4.99,,0.0
+42,42,2023-12-10 13:44:38.701,mtujVRGJ15yUw9Fs,,,Feature Unlock,In-app Purchase,0.3,0.15,Ad-Free Experience,3.99,,0.0
+43,43,2023-12-10 14:06:02.636,liUwSnL96SUzqquH,,,Feature Unlock,Gift Card,0.25,0.3,Super Power Boost,2.99,,0.0
+44,44,2023-12-10 14:31:34.647,qqLdpRoXpaF1RqFy,,,Virtual Currency,In-app Purchase,0.1,0.05,Ad-Free Experience,3.99,,0.0
+45,45,2023-12-10 14:35:38.403,o6SGmorUphbghwf8,,,Power-ups,In-app Purchase,0.3,0.1,Special Character Skin,1.99,,0.0
+46,46,2023-12-10 14:39:10.447,80pmazVMcubFuOaz,,,Virtual Currency,Direct Card,0.15,0.05,Super Power Boost,2.99,BONUS5,0.05
+47,47,2023-12-10 15:09:41.023,pg99Z4Rgtr09Uca1,,,Virtual Currency,Direct Card,0.3,0.05,500 Gold Coins,0.99,,0.0
+48,48,2023-12-10 15:13:41.033,XZluvPVlAbTeRQOf,,,Feature Unlock,Gift Card,0.2,0.05,Ad-Free Experience,3.99,VIP15,0.15
+49,49,2023-12-10 15:39:05.814,E0L9NUcv7VKdS97A,refund,liUwSnL96SUzqquH,Feature Unlock,Gift Card,0.25,0.3,Super Power Boost,2.99,,0.0
+50,50,2023-12-10 15:51:58.445,osg7MMDlUdvu2Ka0,,,Virtual Currency,Gift Card,0.1,0.3,Ad-Free Experience,3.99,,0.0
+51,51,2023-12-10 16:15:00.257,rz9b98cKIewjUSes,,,Virtual Currency,In-app Purchase,0.15,0.1,Premium Level Access,4.99,SALE10,0.1
+52,52,2023-12-10 16:35:03.730,uPAgObII8VkQpyPv,refund,rz9b98cKIewjUSes,Virtual Currency,In-app Purchase,0.15,0.1,Premium Level Access,4.99,SALE10,0.1
+53,53,2023-12-10 16:49:02.540,1sxfyD4a5s7z1KW8,,,Virtual Currency,Direct Card,0.05,0.15,Ad-Free Experience,3.99,,0.0
+54,54,2023-12-10 16:53:48.744,TunCSR3oee2g4u0a,,,Skins,Gift Card,0.05,0.05,Super Power Boost,2.99,,0.0
+55,55,2023-12-10 17:04:23.519,ktcJRplXbyEyWadt,,,Virtual Currency,Gift Card,0.1,0.35,Ad-Free Experience,3.99,,0.0
+56,56,2023-12-10 17:15:40.037,tY6AkTE111eKyzJk,,,Power-ups,Gift Card,0.05,0.25,Premium Level Access,4.99,,0.0
+57,57,2023-12-10 17:25:07.816,Wu1FeM6FNBzTUh1f,,,Virtual Currency,Gift Card,0.25,0.2,Premium Level Access,4.99,,0.0
+58,58,2023-12-10 17:38:08.296,urQvluNpjJx7iQxt,,,Feature Unlock,In-app Purchase,0.25,0.1,Ad-Free Experience,3.99,,0.0
+59,59,2023-12-10 17:40:12.520,3lc9qQuLb9nakCcB,,,Feature Unlock,Gift Card,0.25,0.05,500 Gold Coins,0.99,,0.0
+60,60,2023-12-10 17:41:08.220,urLrM0e0ZEH4ncHS,,,Feature Unlock,Gift Card,0.2,0.25,Ad-Free Experience,3.99,SALE10,0.1
+61,61,2023-12-10 17:42:50.490,8Wv7Ut3PYhErrdCb,,,Feature Unlock,Gift Card,0.2,0.15,Special Character Skin,1.99,SALE10,0.1
+62,62,2023-12-10 17:48:34.511,wW7B9Afgao6TKIL2,,,Skins,In-app Purchase,0.05,0.1,Premium Level Access,4.99,SALE10,0.1
+63,63,2023-12-10 18:07:59.711,vkqTuybw8U3X8TjN,,,Feature Unlock,Gift Card,0.2,0.05,Super Power Boost,2.99,,0.0
+64,64,2023-12-10 18:34:10.011,r43xPkIF6sVPvCuS,,,Power-ups,Gift Card,0.15,0.3,Ad-Free Experience,3.99,,0.0
+65,65,2023-12-10 18:44:23.560,VxIdCGgC7dGVwp6G,,,Virtual Currency,Direct Card,0.2,0.05,Monthly VIP Subscription,5.99,SALE10,0.1
+66,66,2023-12-10 19:20:53.651,XQunMt1Rr7jwlade,refund,3lc9qQuLb9nakCcB,Feature Unlock,Gift Card,0.25,0.05,500 Gold Coins,0.99,,0.0
+67,67,2023-12-10 19:21:20.732,vKrT8loAbRBLPHCy,,,Feature Unlock,Gift Card,0.1,0.2,Monthly VIP Subscription,5.99,VIP15,0.15
+68,68,2023-12-10 19:21:44.026,ujXTL0ncfynSd0hj,,,Power-ups,In-app Purchase,0.2,0.1,Super Power Boost,2.99,SALE10,0.1
+69,69,2023-12-10 19:28:35.943,yNQ7Sq91eIMdWgsq,,,Feature Unlock,In-app Purchase,0.05,0.15,Monthly VIP Subscription,5.99,BONUS5,0.05
+70,70,2023-12-10 19:38:07.953,LUk6waKC2tBYMpp1,refund,tY6AkTE111eKyzJk,Power-ups,Gift Card,0.05,0.25,Premium Level Access,4.99,,0.0
+71,71,2023-12-10 19:53:05.174,Zv3EVRUEFzmWYoGi,,,Skins,Direct Card,0.1,0.35,Premium Level Access,4.99,,0.0
+72,72,2023-12-10 19:53:46.382,7w32vAE4tojL9PwH,,,Skins,Direct Card,0.1,0.1,Ad-Free Experience,3.99,,0.0
+73,73,2023-12-10 20:14:31.889,oQvCdv4E50nXmrCO,,,Feature Unlock,Direct Card,0.15,0.2,Special Character Skin,1.99,BONUS5,0.05
+74,74,2023-12-10 20:30:35.592,6n5oqsuRy9X0toMS,,,Feature Unlock,Direct Card,0.3,0.2,Super Power Boost,2.99,,0.0
+75,75,2023-12-10 20:45:15.833,gsOnYkQjkKtUJCbM,refund,7w32vAE4tojL9PwH,Skins,Direct Card,0.1,0.1,Ad-Free Experience,3.99,,0.0
+76,76,2023-12-10 21:01:48.830,7BSq91dFXBHDwvfY,,,Feature Unlock,In-app Purchase,0.2,0.25,Special Character Skin,1.99,,0.0
+77,77,2023-12-10 21:30:49.689,zQ4IKYzxlX8gAiWp,,,Skins,Direct Card,0.05,0.2,Special Character Skin,1.99,VIP15,0.15
+78,78,2023-12-10 22:16:27.512,DJzOXoDPTwysZxS0,,,Skins,Gift Card,0.2,0.3,Monthly VIP Subscription,5.99,,0.0
+79,79,2023-12-10 22:29:59.677,Dx2NhncQP4ASpKdT,,,Virtual Currency,In-app Purchase,0.3,0.3,Ad-Free Experience,3.99,BONUS5,0.05
+80,80,2023-12-10 22:33:17.905,DY04siN7ywgD7PV6,,,Power-ups,Gift Card,0.15,0.05,Ad-Free Experience,3.99,,0.0
+81,81,2023-12-10 22:39:38.047,s3La7uMI2y20emV8,,,Virtual Currency,Direct Card,0.05,0.1,Monthly VIP Subscription,5.99,,0.0
+82,82,2023-12-10 22:54:26.724,E9OMIBmBDyyb8fUu,,,Skins,In-app Purchase,0.2,0.2,Special Character Skin,1.99,,0.0
+83,83,2023-12-10 23:11:13.231,EtWyjIjM36o4x7Os,,,Skins,In-app Purchase,0.25,0.35,Ad-Free Experience,3.99,VIP15,0.15
+84,84,2023-12-10 23:22:34.017,Dg0Xz3M0B9rA6Zil,,,Skins,Gift Card,0.15,0.2,500 Gold Coins,0.99,,0.0
+85,85,2023-12-10 23:23:50.272,Eans3EhRBjs9V1Oq,,,Power-ups,Direct Card,0.05,0.3,500 Gold Coins,0.99,,0.0
+86,86,2023-12-10 23:41:59.243,5GKImKN60grUzzGR,,,Virtual Currency,Direct Card,0.2,0.25,Monthly VIP Subscription,5.99,,0.0
+87,87,2023-12-10 23:45:05.424,W9B8L7Bg9ERNlAUR,,,Skins,In-app Purchase,0.3,0.25,Monthly VIP Subscription,5.99,,0.0
+88,88,2023-12-10 23:45:46.324,GkBAJa9iH47nDBgo,,,Skins,Gift Card,0.1,0.25,Premium Level Access,4.99,BONUS5,0.05
+89,89,2023-12-10 23:58:52.615,V6F68XCDv2DIM9cL,,,Skins,Direct Card,0.25,0.25,Premium Level Access,4.99,,0.0
+90,90,2023-12-10 23:59:45.821,HCivfCU0Q4mlwYFi,refund,s3La7uMI2y20emV8,Virtual Currency,Direct Card,0.05,0.1,Monthly VIP Subscription,5.99,,0.0

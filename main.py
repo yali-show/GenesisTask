@@ -96,7 +96,7 @@ class GCP:
 
         self.data_frame_for_update = self.setup_existed_data()
 
-        self.installs = self.api_cursor.get_installs(self.DATE)['count']
+        self.upload_changes()
 
     def setup_existed_data(self) -> pd.DataFrame:
         client = storage.Client()
@@ -120,6 +120,7 @@ class GCP:
         return df
 
     def costs_prepare(self) -> float:
+        # TODO change logic
         costs = self.api_cursor.get_costs(self.DATE).content
         data = costs.decode('utf-8')
         data = data.split('\n')
@@ -130,7 +131,6 @@ class GCP:
         # TODO change logic
 
         in_progres = True
-        page = 0
         errors = 10
         output = self.api_cursor.get_events_next_page(self.DATE)
         next_page = output['next_page']
@@ -139,26 +139,17 @@ class GCP:
         while in_progres:
 
             try:
-                page += 1
-                print(page)
 
-                # print(output)
-                output = pd.DataFrame(output)
-                print(output)
+                df = pd.DataFrame(output)
                 logging.info("Trying to get response data")
                 output = self.api_cursor.get_events_next_page(self.DATE,
                                                          next_page)
 
                 logging.info("Trying to get new page's link")
-                next_page = output['next_page']
+                next_page = df['next_page']
 
             except requests.exceptions.JSONDecodeError as json_ex:
-                page -= 1
                 logging.error("Json decode error")
-                errors -= 1
-
-                if errors == 0:
-                    in_progres = False
 
                 time.sleep(5)
 
@@ -171,7 +162,8 @@ class GCP:
 
     def cpi_data(self) -> int:
         costs = self.costs_prepare()
-        data = costs / self.installs
+        installs = self.api_cursor.get_installs(self.DATE)['count']
+        data = costs / installs
         return data
 
     def revenue_data(self) -> int:
@@ -210,26 +202,20 @@ class GCP:
 
 
 if __name__ == '__main__':
-    controller = ApiControl(URL, KEY)
-    # data = {'date': [1], 'instals': [2], 'costs': [3], 'cpi': [4]}
-    # df = pd.DataFrame(data)
-    # print(df.to_csv())
-    data = {'date': ['2023-12-16', '2023-12-17'],
-            'cpi': [2222, 4434],
-            'revenue': [3333, 23434.333],
-            'roas': [234324, 345345]}
 
-    # Создание датафрейма
-    # df = pd.DataFrame(data)
-    # df = pd.DataFrame()
+    controller = ApiControl(URL, KEY)
+
+
+    # df.to_csv("234.csv")
     # print(df)
-    # new_data = {'date': ['2023-12-18'],
-    #         'cpi': [1],
-    #         'revenue': [1],
-    #         'roas': [1]}
-    # new_data = pd.DataFrame(new_data)
-    # print(pd.concat([df, new_data]))
-    #
+    # TODO USE THIS DATA FOR REVENUE
+    df = pd.read_csv('234.csv')
+    result = df.loc[:, ['fee', 'tax', 'iap_item.price', 'discount.amount']]
+    print(result)
+    # df.to_csv("111.csv")
+
+
+
 
 
 
