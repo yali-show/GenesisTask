@@ -1,10 +1,12 @@
-from config import *
+# from config import *
 import base64
 import logging
 import json
 import datetime
 import time
 import io
+
+import pandas.errors
 import requests
 import pandas as pd
 import pyarrow.parquet as pq
@@ -99,8 +101,16 @@ class ApiControl:
 
 class GCP:
     """Preparing data and uploading to GCP"""
-    def __init__(self, url, key):
-        self.api_cursor = ApiControl(url, key)
+    def __init__(self,
+                 url="https://us-central1-passion-fbe7a.cloudfunctions.net/dzn5"
+                     "4vzyt5ga/",
+                 key=({"Authorization": "gAAAAABlgMrTUrw6NDtiMPKmeNvsznOs9B89C8"
+                                        "_Vono-ZYgE8U1Yk712y_HHp-9c4_i4V8meR7Xk"
+                                        "wyGENGJnU8NghexOGfxwYDUfbrLdham2SMql2S"
+                                        "iJUDZc8auwM5Pq0ncaVFmzmUrkEl8lk7-TLPih"
+                                        "PZGWJR5W4A=="},)):
+
+        self.api_cursor = ApiControl(url, key[0])
         self.FILE = 'DataMart_data/DataMart.csv'
         self.PROJECT_NAME = 'hly-gnss'
         self.TABLE_NAME = ['cpi', 'revenue', 'roas']
@@ -109,17 +119,6 @@ class GCP:
                      .strftime('%Y-%m-%d'))
 
         self.data_frame_for_update = self.setup_existed_data()
-
-    def hello_pubsub(self, event, context) -> None:
-        """Triggering from a message of a Pub/Sub
-        :param event: dict event
-        :param context: google.cloud.functions.Context  metadata for event
-        :return:
-        """
-
-        pubsub_ms =base64.b64decode(event['data']).decode('utf-8')
-        print(pubsub_ms)
-        self.upload_changes()
 
     def setup_existed_data(self) -> pd.DataFrame:
         """
@@ -130,11 +129,18 @@ class GCP:
         bucket = client.get_bucket(self.BUCKET_NAMES)
         blob = bucket.blob(self.FILE)
 
-        if blob.exists():
-            file_content = blob.download_as_string()
-            data = io.StringIO(file_content.decode('utf-8'))
-            df = pd.read_csv(data)
-            return df
+        not_exist_or_empty = blob.exists()
+
+        if not_exist_or_empty:
+            try:
+                file_content = blob.download_as_string()
+                data = io.StringIO(file_content.decode('utf-8'))
+                df = pd.read_csv(data)
+                return df
+
+            except pandas.errors.EmptyDataError:
+                logging.warning("Empty data in the DataMart")
+                return pd.DataFrame()
         else:
             return pd.DataFrame()
 
@@ -149,7 +155,9 @@ class GCP:
                         'revenue': [revenue],
                         'roas': [self.roas_data(revenue, costs)]}
 
-            pd.concat([self.data_frame_for_update, new_data])
+            new_data = pd.DataFrame(new_data)
+
+            self.data_frame_for_update = pd.concat([self.data_frame_for_update, new_data])
         except Exception as ex:
             logging.error("Something went wrong in 'GCP.new_data'")
             print(ex)
@@ -176,12 +184,17 @@ class GCP:
         Prepare orders dataset
         :return: pd.DataFrame with orders data
         """
+        try:
+            orders = self.api_cursor.get_orders(self.DATE).content
 
-        parquet_table = pq.read_table(
-            io.BytesIO(self.api_cursor.get_orders(self.DATE).content)
-        )
-        df = parquet_table.to_pandas()
-        return df
+            coded_orders = io.BytesIO(orders)
+
+            parquet_table = pq.read_table(coded_orders)
+            df = parquet_table.to_pandas()
+            return df
+
+        except Exception as ex:
+            logging.error("Orders prepare error")
 
     def costs_prepare(self) -> float:
         """
@@ -254,10 +267,13 @@ class GCP:
         return revenue / costs
 
 
-def hello_pubsub(event, context):
-    connector = GCP(URL, KEY)
-    connector.hello_pubsub(event, context)
+def run_the_code(event, content):
+    pubsub_ms = base64.b64decode(event['data']).decode('utf-8')
+    print(pubsub_ms)
+    connector = GCP()
+    connector.upload_changes()
 
 
 if __name__ == '__main__':
-    hello_pubsub('event', 'context')
+
+    run_the_code('event', 'content')
