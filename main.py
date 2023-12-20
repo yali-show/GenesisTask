@@ -1,4 +1,4 @@
-# from config import *
+from config import *
 import base64
 import logging
 import json
@@ -10,7 +10,7 @@ import pandas.errors
 import requests
 import pandas as pd
 import pyarrow.parquet as pq
-from google.cloud import storage, bigquery
+from google.cloud import storage
 
 
 class ApiControl:
