@@ -1,16 +1,14 @@
-# from config import *
+from config import *
 import base64
 import logging
-import json
 import datetime
-import time
 import io
 
 import pandas.errors
 import requests
 import pandas as pd
 import pyarrow.parquet as pq
-from google.cloud import storage, bigquery
+from google.cloud import storage
 
 
 class ApiControl:
@@ -102,13 +100,8 @@ class ApiControl:
 class GCP:
     """Preparing data and uploading to GCP"""
     def __init__(self,
-                 url="https://us-central1-passion-fbe7a.cloudfunctions.net/dzn5"
-                     "4vzyt5ga/",
-                 key=({"Authorization": "gAAAAABlgMrTUrw6NDtiMPKmeNvsznOs9B89C8"
-                                        "_Vono-ZYgE8U1Yk712y_HHp-9c4_i4V8meR7Xk"
-                                        "wyGENGJnU8NghexOGfxwYDUfbrLdham2SMql2S"
-                                        "iJUDZc8auwM5Pq0ncaVFmzmUrkEl8lk7-TLPih"
-                                        "PZGWJR5W4A=="},)):
+                 url=URL,
+                 key=KEY):
 
         self.api_cursor = ApiControl(url, key[0])
         self.FILE = 'DataMart_data/DataMart.csv'
@@ -206,38 +199,6 @@ class GCP:
         data = data.split('\n')
         costs = float(data[1])
         return costs
-
-    # def events_prepare(self):
-    #     # TODO need in?
-    #
-    #     in_progres = True
-    #     output = self.api_cursor.get_events_next_page(self.DATE)
-    #     next_page = output['next_page']
-    #     output = output['data']
-    #
-    #     while in_progres:
-    #
-    #         try:
-    #
-    #             df = pd.DataFrame(output)
-    #             logging.info("Trying to get response data")
-    #             output = self.api_cursor.get_events_next_page(self.DATE,
-    #                                                      next_page)
-    #
-    #             logging.info("Trying to get new page's link")
-    #             next_page = df['next_page']
-    #
-    #         except requests.exceptions.JSONDecodeError as json_ex:
-    #             logging.error("Json decode error")
-    #
-    #             time.sleep(5)
-    #
-    #         except KeyError as krr:
-    #
-    #             logging.warning("The last one page was shared or api changed",
-    #                             exc_info=krr)
-    #
-    #             in_progres = False
 
     def cpi_data(self, costs) -> float:
         """
